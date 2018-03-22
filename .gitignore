@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/csharp/InsertionSort/InsertionSort.Console/obj/Debug
+/csharp/InsertionSort/InsertionSort.Console/bin/Debug
+/csharp/InsertionSort/.vs/InsertionSort/v15
