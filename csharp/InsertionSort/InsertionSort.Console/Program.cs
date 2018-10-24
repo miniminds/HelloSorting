@@ -12,11 +12,11 @@ namespace InsertionSort.ConsoleApp
         {
             List<int> sortList = new List<int>();
             string introMessage = "Please enter a series of integer , sperate them with comma" + System.Environment.NewLine
-            +" i.e.  1,4,88,4,7,4,12";
+            + " i.e.  1,4,88,4,7,4,12" + System.Environment.NewLine;
             Console.WriteLine(introMessage);
 
-            string readStr = Console.ReadLine();
-
+            // string readStr = Console.ReadLine();
+            string readStr = "5,3,2,1,9,8,6"; //for testing purpose
             string[] inputSplit = readStr.Split(',');
 
             // veriffy each input is integer
@@ -24,38 +24,36 @@ namespace InsertionSort.ConsoleApp
             {
                 int.TryParse(j1, out int a);
                 sortList.Add(a);
-                Console.WriteLine(a.ToString());
             }
             int i, j, k;
-            
-            for (i=1; i== sortList.Count() ;i++)
+            //sorting algorithm 
+            for (i = 1; i < sortList.Count(); i++)
             {
-                int current = sortList[i];
-                j = 0;
-                while ( j<=i)
+                j = i - 1;
+                Console.Write("Step: " + i.ToString() + " ");
+                while (j >= 0)
                 {
-                    if ( current<sortList[j] && j!=0)
+
+                    int current = sortList[i];
+                    int compare = sortList[j];
+                    if (current < compare)
                     {
-                        //swap
-                        sortList[i] = sortList[j];
+                        //swap  current and compare
                         sortList[j] = current;
-                        j = i + 1; //exit this loop
+                        sortList[i] = compare;
+                        i--;
                     }
-                    else
-                    {
-                        j++;
-                        //do nothing and go to next number
-                    }
-                    foreach (var prt in inputSplit)
-                    {
-                        Console.Write(prt.ToString());
-                    }
+                    j--;
+                }
+                foreach ( int a in sortList)
+                {
+                    Console.Write(a.ToString() + ' ');
                 }
                 Console.WriteLine();
+                
             }
-
-            Console.Read();
-
+            Console.Write("Sorting completed.");
         }
+
     }
 }
