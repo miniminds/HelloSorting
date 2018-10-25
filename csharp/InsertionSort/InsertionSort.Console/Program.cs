@@ -11,49 +11,67 @@ namespace InsertionSort.ConsoleApp
         static void Main(string[] args)
         {
             List<int> sortList = new List<int>();
-            string introMessage = "Please enter a series of integer , sperate them with comma" + System.Environment.NewLine
-            + " i.e.  1,4,88,4,7,4,12" + System.Environment.NewLine;
-            Console.WriteLine(introMessage);
 
-            // string readStr = Console.ReadLine();
-            string readStr = "5,3,2,1,9,8,6"; //for testing purpose
-            string[] inputSplit = readStr.Split(',');
-
-            // veriffy each input is integer
-            foreach (var j1 in inputSplit)
+            //randomly generate 100K integer
+            Random rnd = new Random();
+            Console.Write("Enter a list count: ");
+            var input = Console.ReadLine();
+            
+            int.TryParse(input, out int inputNumber);
+            for ( var num =1; num <=inputNumber;num++)
             {
-                int.TryParse(j1, out int a);
-                sortList.Add(a);
+                sortList.Add(rnd.Next(9999));
             }
-            int i, j, k;
+
+            DisplaySortList(sortList, inputNumber);
+
+            Console.WriteLine();
+            Console.WriteLine(" Sorting ...");
+
+            int i, j;
             //sorting algorithm 
+            // i index is  Key compare to the element  to its left (i-1)=>j
             for (i = 1; i < sortList.Count(); i++)
             {
-                j = i - 1;
-                Console.Write("Step: " + i.ToString() + " ");
-                while (j >= 0)
+                int key = sortList[i];
+                for (j = (i - 1); j >= 0; j--)
                 {
-
-                    int current = sortList[i];
-                    int compare = sortList[j];
-                    if (current < compare)
+                    int current = sortList[j];
+                    if (key <= current)
                     {
-                        //swap  current and compare
-                        sortList[j] = current;
-                        sortList[i] = compare;
-                        i--;
+                        sortList[j] = key;
+                        sortList[j+1] = current;
                     }
-                    j--;
                 }
-                foreach ( int a in sortList)
-                {
-                    Console.Write(a.ToString() + ' ');
-                }
-                Console.WriteLine();
-                
-            }
-            Console.Write("Sorting completed.");
-        }
 
+               
+            }
+
+            DisplaySortList(sortList, inputNumber);
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write("Sorting completed. Press any key ..");
+            Console.ReadLine();
+        }
+        private static void DisplaySortList(List<int> _list, int inputNum)
+        {
+            try
+            {
+                for (int output = 0; output <= ((inputNum -1)% 100); output++)
+                {
+                    if ((output % 5) == 0)
+                    {
+                        Console.WriteLine();
+                    }
+                    Console.Write(_list[output].ToString() + ' ');
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
